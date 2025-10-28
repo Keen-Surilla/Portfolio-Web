@@ -16,6 +16,17 @@ const Skills = () => {
       description: 'Specialized in Arduino programming for embedded systems, sensor integration, and automated control systems. Focus on creating efficient and reliable hardware solutions.',
       icon: '⚡',
       features: ['Embedded Systems', 'Sensor Integration', 'Control Systems']
+    },
+    {
+      category: 'Frontend Developer',
+      tool: 'Flutter',
+      description: 'Specialize in building cross-platform mobile applications using the Flutter framework. I focus on creating visually appealing, responsive, and user-friendly interfaces that deliver seamless performance on both Android and iOS.',
+      icon: '📱',
+      features: [
+        'Responsive design',
+        'Modern UI/UX',
+        'User authentication'
+      ]
     }
   ];
 

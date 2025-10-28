@@ -18,18 +18,13 @@ const Contact = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     
-    // Construct email content
     const subject = `Portfolio Contact from ${formData.name}`;
     const body = `Name: ${formData.name}
 Email: ${formData.email}
 
 Message:
 ${formData.message}`;
-
-    // Create mailto link
     const mailtoLink = `mailto:keendraylinsurilla@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    
-    // Open default email client
     window.location.href = mailtoLink;
   };
 

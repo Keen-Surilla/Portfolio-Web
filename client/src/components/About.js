@@ -20,11 +20,11 @@ const About = () => {
             <div className="about-details">
               <div className="about-item">
                 <span className="about-label">Experience:</span>
-                <span className="about-value">2 months</span>
+                <span className="about-value">4 months</span>
               </div>
               <div className="about-item">
                 <span className="about-label">Projects Completed:</span>
-                <span className="about-value">4</span>
+                <span className="about-value">5</span>
               </div>
               <div className="about-item">
                 <span className="about-label">Clients Served:</span>
@@ -35,7 +35,7 @@ const About = () => {
 
           <div className="about-image-container">
             <img 
-              src="/about.jpg" 
+              src={`${process.env.PUBLIC_URL}/about.jpg`} 
               alt="Keen Draylin Surilla" 
               className="about-image"
             />

@@ -22,7 +22,7 @@ const Hero = () => {
         </div>
         <div className="hero-image-container">
           <img 
-            src="/me.png" 
+            src={`${process.env.PUBLIC_URL}/me.jpg`} 
             alt="Keen Draylin Surilla"
             className="hero-image"
           />

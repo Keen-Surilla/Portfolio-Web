@@ -23,13 +23,11 @@ function App() {
       }
     );
 
-    // Observe all sections
     document.querySelectorAll('section').forEach((section) => {
       observer.observe(section);
     });
 
     return () => {
-      // Cleanup observer
       document.querySelectorAll('section').forEach((section) => {
         observer.unobserve(section);
       });
