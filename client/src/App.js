@@ -1,51 +1,56 @@
-import React, { useEffect } from 'react';
-import './App.css';
-import Navbar from './components/Navbar';
+import React, { useState, useEffect } from 'react';
+import Sidebar from './components/Sidebar';
 import Hero from './components/Hero';
-import About from './components/About';
-import Skills from './components/Skills';
 import Projects from './components/Projects';
+import ProjectsPage from './components/ProjectsPage';
+import Stack from './components/Stack';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 
+// "#/projects" shows the all-projects page; every other hash shows the home page.
+const getPage = () => (window.location.hash === '#/projects' ? 'projects' : 'home');
+
 function App() {
+  const [page, setPage] = useState(getPage);
+
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-          }
-        });
-      },
-      {
-        threshold: 0.1,
-      }
-    );
-
-    document.querySelectorAll('section').forEach((section) => {
-      observer.observe(section);
-    });
-
-    return () => {
-      document.querySelectorAll('section').forEach((section) => {
-        observer.unobserve(section);
-      });
-    };
+    const onHash = () => setPage(getPage());
+    window.addEventListener('hashchange', onHash);
+    return () => window.removeEventListener('hashchange', onHash);
   }, []);
 
+  // After switching pages, jump to the top or to the requested section.
+  useEffect(() => {
+    const id = window.location.hash.slice(1);
+    if (page === 'projects' || !id) {
+      window.scrollTo(0, 0);
+      return;
+    }
+    requestAnimationFrame(() => {
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView();
+    });
+  }, [page]);
+
   return (
-    <div className="App">
-      <Navbar />
-      <main className="main-content">
-        <Hero />
-        <About />
-        <Skills />
-        <Projects />
-        <Contact />
+    <>
+      <Sidebar page={page} />
+      <main className="main">
+        <div className="main-inner">
+          {page === 'projects' ? (
+            <ProjectsPage />
+          ) : (
+            <>
+              <Hero />
+              <Projects />
+              <Stack />
+              <Contact />
+            </>
+          )}
+          <Footer />
+        </div>
       </main>
-      <Footer />
-    </div>
+    </>
   );
 }
 

@@ -1,0 +1,8 @@
+.timeline { list-style: none; margin: 0; padding: 0; }
+.timeline-row { display: grid; grid-template-columns: 80px 1fr auto; gap: 1.5rem; padding: 1.1rem 0; border-top: 1px solid var(--border); align-items: baseline; }
+.timeline-row:first-child { border-top: 0; padding-top: 0; }
+.timeline-note { text-align: right; }
+@media (max-width: 900px) {
+  .timeline-row { grid-template-columns: 56px 1fr; gap: 1rem; }
+  .timeline-note { grid-column: 2; text-align: left; }
+}

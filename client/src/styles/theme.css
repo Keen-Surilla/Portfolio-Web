@@ -1,0 +1,91 @@
+/* ==========================================================
+   THEME FILE: the only place colors, fonts and sizes live.
+   Change a value here and the whole site updates.
+   ========================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500;600&display=swap');
+
+:root {
+  /* ---- Fonts ---- */
+  --font-heading: 'Geist Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+  --font-mono: 'Geist Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+  --font-body: 'Geist', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --heading-weight: 500;
+  --heading-tracking: -0.03em;
+
+  /* ---- Type scale ---- */
+  --fs-h1: clamp(2.2rem, 5.5vw, 3.3rem);
+  --fs-h2: clamp(2rem, 4.5vw, 2.8rem);
+  --fs-h3: 1.4rem;
+  --fs-section: 1.5rem;
+  --fs-body: 1.05rem;
+  --fs-small: 0.9rem;
+
+  /* ---- Layout ---- */
+  --max-width: 1100px;
+  --radius: 14px;
+  --nav-height: 64px;
+  --sidebar-width: 280px;
+}
+
+/* ---------- DARK (default) ---------- */
+:root,
+[data-theme='dark'] {
+  color-scheme: dark;
+
+  --bg: #101012;
+  --bg-glass: rgba(16, 16, 18, 0.85);
+  --surface: #18181b;
+  --border: #2c2c31;
+
+  --text-heading: #fafafa;     /* h1, h2 */
+  --text-subheading: #d4d4d8;  /* h3, h4, subtitles */
+  --text-body: #a1a1aa;        /* paragraphs */
+  --text-muted: #71717a;       /* small notes */
+
+  --accent: #7c9bff;           /* the ONE accent color */
+  --accent-soft: rgba(124, 155, 255, 0.14);
+
+  --btn-primary-bg: #7c9bff;
+  --btn-primary-text: #0b1020;
+  --btn-primary-hover: #a3b9ff;
+  --btn-secondary-border: #3a3a40;
+  --btn-secondary-text: #fafafa;
+  --btn-secondary-hover-bg: #202024;
+
+  --photo-filter: grayscale(1) contrast(1.1);
+  --shadow-card: 0 24px 48px -24px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(255, 255, 255, 0.02) inset;
+
+  --success: #4ade80;
+  --danger: #f87171;
+}
+
+/* ---------- LIGHT ---------- */
+[data-theme='light'] {
+  color-scheme: light;
+
+  --bg: #ffffff;
+  --bg-glass: rgba(255, 255, 255, 0.85);
+  --surface: #f4f4f5;
+  --border: #e4e4e7;
+
+  --text-heading: #0a0a0a;
+  --text-subheading: #27272a;
+  --text-body: #52525b;
+  --text-muted: #71717a;
+
+  --accent: #2f55e8;
+  --accent-soft: rgba(47, 85, 232, 0.1);
+
+  --btn-primary-bg: #2f55e8;
+  --btn-primary-text: #ffffff;
+  --btn-primary-hover: #1f3fc2;
+  --btn-secondary-border: #d4d4d8;
+  --btn-secondary-text: #0a0a0a;
+  --btn-secondary-hover-bg: #f4f4f5;
+
+  --photo-filter: grayscale(1) contrast(1.05);
+  --shadow-card: 0 24px 48px -26px rgba(0, 0, 0, 0.28);
+
+  --success: #16a34a;
+  --danger: #dc2626;
+}

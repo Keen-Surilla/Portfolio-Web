@@ -1,0 +1,7 @@
+:where(.gaze-photo) {
+  width: 220px;
+  aspect-ratio: 597 / 800;
+  border-radius: 24px;
+  background-color: #f1f1f1;
+  flex-shrink: 0;
+}

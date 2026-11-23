@@ -1,0 +1,59 @@
+/* Shared building blocks. Uses ONLY tokens from theme.css. */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 1rem; }
+body {
+  margin: 0; background: var(--bg); color: var(--text-body);
+  font-family: var(--font-body); font-size: var(--fs-body); line-height: 1.65;
+  transition: background 0.25s ease, color 0.25s ease;
+}
+h1, h2 { font-family: var(--font-heading); color: var(--text-heading); font-weight: var(--heading-weight); letter-spacing: var(--heading-tracking); line-height: 1.1; margin: 0; }
+h1 { font-size: var(--fs-h1); overflow-wrap: anywhere; }
+h2 { font-size: var(--fs-section); }
+h3, h4 { color: var(--text-subheading); font-weight: 500; margin: 0; }
+h3 { font-size: 1.15rem; }
+p { margin: 0; }
+a { color: var(--accent); }
+img { max-width: 100%; display: block; }
+
+/* Page layout: fixed sidebar + scrolling main column */
+.main { margin-left: var(--sidebar-width); border-left: 1px solid var(--border); min-height: 100vh; overflow-x: clip; }
+.main-inner { max-width: 960px; margin: 0 auto; padding: 0 3rem; }
+.section { padding: 4.5rem 0; border-top: 1px solid var(--border); }
+.section-head { display: flex; align-items: baseline; gap: 0.4rem; margin-bottom: 2.25rem; }
+.section-head h2 { font: 400 var(--fs-small) var(--font-mono); letter-spacing: 0; color: var(--text-muted); }
+.section-link { margin-left: auto; font: 400 0.8rem var(--font-mono); letter-spacing: 0.04em; text-transform: uppercase; color: var(--text-body); text-decoration: none; }
+.section-link:hover { color: var(--accent); }
+.section-index { font-family: var(--font-mono); font-size: var(--fs-small); color: var(--text-muted); }
+.section-index::after { content: ' \2014'; }
+.small { font-size: var(--fs-small); color: var(--text-muted); }
+.mono { font-family: var(--font-mono); }
+
+.btn {
+  display: inline-block; padding: 0.7rem 1.3rem; border-radius: var(--radius);
+  font: 500 0.85rem var(--font-mono); text-decoration: none; cursor: pointer;
+  border: 1px solid transparent; transition: background 0.2s ease;
+}
+.btn-primary { background: var(--btn-primary-bg); color: var(--btn-primary-text); }
+.btn-primary:hover { background: var(--btn-primary-hover); }
+.btn-secondary { border-color: var(--btn-secondary-border); color: var(--btn-secondary-text); background: transparent; }
+.btn-secondary:hover { background: var(--btn-secondary-hover-bg); }
+
+.tag {
+  display: inline-block; padding: 0.2rem 0.7rem; border-radius: 999px; border: 1px solid var(--border);
+  color: var(--text-subheading); font: 400 var(--fs-small) var(--font-mono);
+}
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow-card); }
+
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; scroll-behavior: auto !important; } }
+
+@media (max-width: 900px) {
+  .main { margin-left: 0; border-left: 0; padding-top: var(--nav-height); }
+  .main-inner { padding: 0 1.25rem; }
+  .section { padding: 3rem 0; }
+}
+
+/* On phones the top bar is fixed, so keep section titles clear of it when jumping. */
+@media (max-width: 900px) {
+  html { scroll-padding-top: calc(var(--nav-height) + 1rem); }
+}

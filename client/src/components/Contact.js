@@ -1,126 +1,33 @@
 import React, { useState } from 'react';
 import './Contact.css';
+import { profile } from '../data/content';
+import { emailProps } from '../utils/email';
 
 const Contact = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: ''
-  });
+  const [copied, setCopied] = useState(false);
 
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    
-    const subject = `Portfolio Contact from ${formData.name}`;
-    const body = `Name: ${formData.name}
-Email: ${formData.email}
-
-Message:
-${formData.message}`;
-    const mailtoLink = `mailto:keendraylinsurilla@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    window.location.href = mailtoLink;
+  const copy = async () => {
+    try {
+      await navigator.clipboard.writeText(profile.email);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1800);
+    } catch (e) {}
   };
 
   return (
-    <section id="contact" className="contact">
-      <div className="contact-container">
-        <h2 className="section-title">
-          <span className="code-symbol">{'<'}</span>
-          <span>Contact</span>
-          <span className="code-symbol">{'/>'}</span>
-        </h2>
-
-        <div className="contact-content">
-          <div className="contact-info">
-            <h3>Get In Touch</h3>
-            <p>I'm always open to discussing new projects, creative ideas or opportunities to be part of your visions.</p>
-            
-            <div className="contact-details">
-              <div className="contact-item">
-                <i className="fas fa-envelope"></i>
-                <div>
-                  <h3>Email</h3>
-                  <p>keendraylinsurilla@gmail.com</p>
-                </div>
-              </div>
-              <div className="contact-item">
-                <i className="fas fa-map-marker-alt"></i>
-                <div>
-                  <h3>Location</h3>
-                  <p>Libertad, Antique</p>
-                </div>
-              </div>
-              <div className="contact-item">
-                <i className="fab fa-facebook"></i>
-                <div>
-                  <h3>Facebook</h3>
-                  <a 
-                    href="https://www.facebook.com/share/1A5rAmA7nP/" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                  >
-                    Keen Draylin Surilla
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <form className="contact-form" onSubmit={handleSubmit}>
-            <div className="form-group">
-              <label htmlFor="name">Name</label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                required
-                placeholder="Your Name"
-              />
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="email">Email</label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                required
-                placeholder="Email"
-              />
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="message">Message</label>
-              <textarea
-                id="message"
-                name="message"
-                value={formData.message}
-                onChange={handleChange}
-                required
-                placeholder="Your message here..."
-                rows="5"
-              ></textarea>
-            </div>
-
-            <button type="submit" className="submit-button">
-              Send Message
-            </button>
-          </form>
-        </div>
+    <section id="contact" className="section">
+      <div className="section-head"><span className="section-index">03</span><h2>say hello</h2></div>
+      <p className="contact-text">For work, collabs, or just to say hi, drop me a line.</p>
+      <div className="contact-email card">
+        <span className="mono">{profile.email}</span>
+        <button className="btn btn-secondary" onClick={copy}>{copied ? 'Copied' : 'Copy'}</button>
+      </div>
+      <div className="contact-actions">
+        <a className="btn btn-primary" {...emailProps(profile.email)}>Send an email</a>
+        <span className="small">{profile.location}</span>
       </div>
     </section>
   );
 };
 
-export default Contact; 
+export default Contact;

@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
+import './styles/theme.css';   // colors, fonts, sizes (edit this one to restyle)
+import './styles/global.css';  // shared styles built from the theme tokens
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
@@ -10,4 +11,5 @@ root.render(
     <App />
   </React.StrictMode>
 );
+
 reportWebVitals();
