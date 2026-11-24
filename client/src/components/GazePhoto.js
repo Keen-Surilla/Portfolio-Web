@@ -29,22 +29,30 @@ export default function GazePhoto({ alt = "Me", className = "", fallback }) {
     };
   }, []);
 
-  const box = { position: "relative", overflow: "hidden" };
+  const box = {
+    position: "relative",
+    overflow: "hidden",
+    WebkitTouchCallout: "none", // no iOS "save image" menu on long press
+    WebkitUserSelect: "none",
+    userSelect: "none",
+  };
+  const block = (e) => e.preventDefault(); // no right-click / long-press menu
 
   if (failed) {
     return (
-      <div ref={ref} className={`gaze-photo ${className}`} style={box}>
+      <div ref={ref} className={`gaze-photo ${className}`} style={box} onContextMenu={block}>
         <img
           src={fallback}
           alt={alt}
-          style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top" }}
+          draggable="false"
+          style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top", pointerEvents: "none", WebkitTouchCallout: "none", userSelect: "none" }}
         />
       </div>
     );
   }
 
   return (
-    <div ref={ref} className={`gaze-photo ${className}`} style={box} role="img" aria-label={alt}>
+    <div ref={ref} className={`gaze-photo ${className}`} style={box} onContextMenu={block} role="img" aria-label={alt}>
       <img
         src={SRC}
         alt=""
@@ -62,6 +70,8 @@ export default function GazePhoto({ alt = "Me", className = "", fallback }) {
           maxWidth: "none",
           transform: `translate(${-pos.col * 33.3333}%, ${-pos.row * 33.3333}%)`,
           userSelect: "none",
+          pointerEvents: "none", // touches/clicks go to the wrapper, not the image
+          WebkitTouchCallout: "none",
         }}
       />
     </div>
