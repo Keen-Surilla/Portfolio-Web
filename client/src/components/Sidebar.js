@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { flushSync } from 'react-dom';
 import './Sidebar.css';
 import useTheme from '../hooks/useTheme';
 import { emailProps } from '../utils/email';
@@ -75,6 +76,32 @@ const Sidebar = ({ page }) => {
   const pageId = page === 'projects' || page === 'certificates' ? page : null;
   const current = pageId || active;
 
+  // Theme change: a circle grows from the clicked button and reveals the new theme.
+  // Falls back to a plain switch in browsers without View Transitions or with reduced motion.
+  const switchTheme = (mode, event) => {
+    if (mode === preference) return;
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!document.startViewTransition || reduce) {
+      setPreference(mode);
+      return;
+    }
+    const rect = event.currentTarget.getBoundingClientRect();
+    const x = rect.left + rect.width / 2;
+    const y = rect.top + rect.height / 2;
+    const radius = Math.hypot(Math.max(x, window.innerWidth - x), Math.max(y, window.innerHeight - y));
+    const transition = document.startViewTransition(() => {
+      flushSync(() => setPreference(mode));
+    });
+    transition.ready
+      .then(() => {
+        document.documentElement.animate(
+          { clipPath: [`circle(0px at ${x}px ${y}px)`, `circle(${radius}px at ${x}px ${y}px)`] },
+          { duration: 650, easing: 'ease-in-out', pseudoElement: '::view-transition-new(root)' }
+        );
+      })
+      .catch(() => {});
+  };
+
   return (
     <aside className="sidebar">
       <div className="sidebar-top">
@@ -108,7 +135,7 @@ const Sidebar = ({ page }) => {
               <button
                 key={mode}
                 className={preference === mode ? 'on' : ''}
-                onClick={() => setPreference(mode)}
+                onClick={(e) => switchTheme(mode, e)}
                 aria-label={`${mode} theme`}
                 aria-pressed={preference === mode}
                 title={mode}

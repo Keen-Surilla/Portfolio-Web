@@ -42,3 +42,8 @@
   .sidebar-body.active { left: 0; }
   .sidebar-link { font-size: 1.1rem; padding: 0.6rem 0; }
 }
+/* Theme switch: no cross-fade, the new theme is revealed by the growing circle (see Sidebar.js) */
+::view-transition-old(root),
+::view-transition-new(root) { animation: none; mix-blend-mode: normal; }
+::view-transition-old(root) { z-index: 1; }
+::view-transition-new(root) { z-index: 2147483646; }

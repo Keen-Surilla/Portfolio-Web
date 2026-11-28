@@ -67,7 +67,7 @@ function App() {
           <Footer />
         </div>
       </main>
-      <GuideCursor />
+      <GuideCursor page={page} />
     </>
   );
 }
