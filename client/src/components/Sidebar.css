@@ -7,11 +7,14 @@
 .sidebar-body { display: flex; flex-direction: column; flex: 1; margin-top: 2.5rem; }
 .sidebar-nav { display: flex; flex-direction: column; gap: 0.25rem; }
 .sidebar-link {
-  padding: 0.4rem 0.6rem; border-radius: 6px; text-decoration: none;
+  padding: 0.4rem 0; text-decoration: none;
   font: 400 var(--fs-small) var(--font-mono); color: var(--text-body);
+  transition: color 0.2s ease;
 }
-.sidebar-link:hover { color: var(--text-heading); background: var(--surface); }
-.sidebar-link.current { color: var(--accent); background: var(--accent-soft); }
+.sidebar-link:hover { color: var(--text-heading); }
+/* Current section: no highlight box, just darker text with a small arrow in front */
+.sidebar-link.current { color: var(--text-heading); }
+.sidebar-link.current::before { content: '\2192'; margin-right: 0.5rem; }
 .sidebar-footer { margin-top: auto; padding-top: 1.25rem; border-top: 1px solid var(--border); display: flex; flex-direction: column; gap: 0.75rem; }
 .sidebar-email { display: flex; align-items: center; gap: 0.5rem; max-width: 100%; color: var(--text-heading); font: 400 0.72rem var(--font-mono); text-decoration: none; white-space: nowrap; }
 .sidebar-email span { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
@@ -24,7 +27,7 @@
 }
 .theme-switch button:hover { color: var(--text-heading); }
 .theme-switch button.on { background: var(--surface); border-color: var(--border); color: var(--text-heading); }
-.sidebar-email:hover { color: var(--accent); }
+.sidebar-email:hover { color: var(--text-body); }
 
 @media (max-width: 900px) {
   .sidebar { right: 0; bottom: auto; width: auto; height: var(--nav-height); padding: 0 1.25rem; border-bottom: 1px solid var(--border); background: var(--bg-glass); backdrop-filter: blur(10px); }
@@ -37,5 +40,5 @@
     margin: 0; padding: 2rem 1.25rem; background: var(--bg); transition: left 0.3s ease;
   }
   .sidebar-body.active { left: 0; }
-  .sidebar-link { font-size: 1.1rem; padding: 0.6rem; }
+  .sidebar-link { font-size: 1.1rem; padding: 0.6rem 0; }
 }

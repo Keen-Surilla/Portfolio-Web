@@ -1,0 +1,27 @@
+/* Plain text link with a small arrow, same look as the github / facebook / email links.
+   Written with extra specificity so no global link style (blue, underline) can override it. */
+a.project-link,
+a.project-link:link,
+a.project-link:visited,
+a.project-link:active,
+a.project-link:focus {
+  font: 500 0.85rem var(--font-mono);
+  letter-spacing: 0.02em;
+  color: var(--text-body);
+  text-decoration: none;
+  border-bottom: 0;
+  background: none;
+  transition: color 0.2s ease;
+}
+a.project-link:hover {
+  color: var(--text-heading);
+  text-decoration: none;
+}
+.project-link-arrow {
+  display: inline-block;
+  margin-left: 4px;
+  font-size: 0.85em;
+  text-decoration: none;
+  transition: transform 0.2s ease;
+}
+a.project-link:hover .project-link-arrow { transform: translate(2px, -2px); }

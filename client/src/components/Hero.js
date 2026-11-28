@@ -19,6 +19,7 @@ const CHIP_ICON = {
   'full-stack': 'code',
   web: 'monitor',
   'mobile apps': 'phone',
+  mobile: 'phone',
   figma: 'figma',
   'cool new stuff': 'rocket',
   'rough ideas': 'pencil',

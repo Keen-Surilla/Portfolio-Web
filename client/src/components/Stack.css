@@ -1,1 +1,16 @@
+.stack-groups { display: flex; flex-direction: column; gap: 1.4rem; }
+.stack-group-label {
+  margin: 0 0 0.6rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  opacity: 0.6;
+}
 .stack-list { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+
+/* Outlined chips */
+.stack-list .tag {
+  background: transparent;
+  border: 1px solid rgba(127, 127, 127, 0.35);
+  border-radius: 6px;
+  padding: 0.45rem 0.9rem;
+}

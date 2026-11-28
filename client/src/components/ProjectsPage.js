@@ -1,6 +1,7 @@
 import React from 'react';
 import './ProjectsPage.css';
 import { projects, moreProjects } from '../data/content';
+import ProjectLink from './ProjectLink';
 
 const all = [...projects, ...moreProjects];
 
@@ -26,7 +27,7 @@ const ProjectsPage = () => (
             <p className="small page-description">{p.description}</p>
             <div className="page-tags">{p.technologies.map((t) => <span key={t} className="tag">{t}</span>)}</div>
             {p.link ? (
-              <a href={p.link} className="btn btn-secondary" target="_blank" rel="noopener noreferrer">View project</a>
+              <ProjectLink href={p.link} />
             ) : (
               <span className="small">In development</span>
             )}

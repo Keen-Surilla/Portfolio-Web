@@ -1,0 +1,53 @@
+.cert-group { margin-bottom: 2.5rem; }
+.cert-group-title {
+  font: 400 0.75rem var(--font-mono); letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--text-muted); margin-bottom: 1.25rem;
+}
+.cert-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 230px), 1fr));
+  gap: 1.1rem; padding: 0.5rem 0.25rem 1rem; /* room so the tilted cards are not clipped */
+}
+
+/* Small tilted tiles with a soft shadow */
+.cert-tile {
+  display: flex; flex-direction: column; align-items: center; text-align: center;
+  padding: 1.25rem 1rem 1rem; gap: 0.35rem; min-height: 190px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
+  transition: transform 0.35s cubic-bezier(0.2, 0.7, 0.2, 1), box-shadow 0.35s ease;
+}
+.cert-tile:nth-child(4n + 1) { transform: rotate(-1.2deg) translateY(3px); }
+.cert-tile:nth-child(4n + 2) { transform: rotate(0.8deg) translateY(-4px); }
+.cert-tile:nth-child(4n + 3) { transform: rotate(-0.6deg) translateY(2px); }
+.cert-tile:nth-child(4n + 4) { transform: rotate(1.4deg) translateY(-6px); }
+.cert-tile:hover { transform: rotate(0deg) translateY(-6px); box-shadow: 0 16px 36px rgba(0, 0, 0, 0.12); }
+
+.cert-icon {
+  width: 40px; height: 40px; flex: none; margin-bottom: 0.4rem; border-radius: 10px;
+  border: 1px solid var(--border); background: #fff; /* white so logos stay readable in dark mode */
+  display: grid; place-items: center; overflow: hidden;
+}
+.cert-icon img { width: 70%; height: 70%; object-fit: contain; user-select: none; -webkit-touch-callout: none; }
+.cert-letter { font: 500 1rem var(--font-mono); color: var(--text-heading); }
+
+.cert-grid--wide { grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); }
+.section .cert-group:last-child { margin-bottom: 0; }
+
+.cert-tile h3 { font-family: var(--font-heading); font-weight: 500; font-size: 0.95rem; line-height: 1.3; letter-spacing: -0.01em; }
+.cert-issuer { font: 400 0.68rem var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); }
+.cert-date { font: 400 0.72rem var(--font-mono); color: var(--text-muted); }
+.cert-subtitle { font-size: 0.8rem; color: var(--text-body); }
+.cert-badge { margin-top: 0.4rem; }
+.cert-description { font-size: 0.82rem; color: var(--text-body); margin-top: 0.35rem; }
+a.cert-verify, a.cert-verify:visited {
+  margin-top: auto; padding-top: 0.75rem; text-decoration: none;
+  font: 400 0.68rem var(--font-mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted);
+  transition: color 0.2s ease;
+}
+a.cert-verify:hover { color: var(--text-heading); text-decoration: none; }
+
+/* The whole card is the link: clicking anywhere opens it, and hovering anywhere looks like hovering "verify" */
+.cert-tile { position: relative; }
+.cert-tile.has-link { cursor: pointer; }
+a.cert-verify::after { content: ''; position: absolute; inset: 0; border-radius: inherit; }
+.cert-tile:hover a.cert-verify { color: var(--text-heading); }
+.cert-tile:focus-within { outline: 2px solid var(--text-heading); outline-offset: 4px; }

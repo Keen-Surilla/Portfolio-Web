@@ -35,7 +35,7 @@ const Sidebar = ({ page }) => {
   // Highlight the section being read. The last section (Contact) is short, so
   // when the page is scrolled all the way down we always pick the last one.
   useEffect(() => {
-    if (page === 'projects') return undefined;
+    if (page !== 'home') return undefined;
     const ids = nav.map((n) => n.id);
 
     const update = () => {
@@ -71,7 +71,9 @@ const Sidebar = ({ page }) => {
     };
   }, [page]);
 
-  const current = page === 'projects' ? 'projects' : active;
+  // On the full pages, the matching sidebar item stays highlighted.
+  const pageId = page === 'projects' || page === 'certificates' ? page : null;
+  const current = pageId || active;
 
   return (
     <aside className="sidebar">
@@ -87,7 +89,7 @@ const Sidebar = ({ page }) => {
           {nav.map((item) => (
             <a
               key={item.id}
-              href={item.id === 'projects' && page === 'projects' ? '#/projects' : `#${item.id}`}
+              href={item.id === pageId ? `#/${item.id}` : `#${item.id}`}
               className={`sidebar-link ${current === item.id ? 'current' : ''}`}
               onClick={() => {
                 lockRef.current = item.id;

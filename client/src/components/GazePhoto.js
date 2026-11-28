@@ -10,21 +10,38 @@ export default function GazePhoto({ alt = "Me", className = "", fallback }) {
   const [failed, setFailed] = useState(false);
 
   useEffect(() => {
-    const onMove = (e) => {
+    // While the intro guide cursor is on screen it sends "guide-gaze" events; the photo
+    // looks at it first, then goes back to following the visitor's mouse.
+    const guide = { active: false };
+
+    const look = (x, y) => {
       if (!ref.current) return;
       const r = ref.current.getBoundingClientRect();
-      const dx = e.clientX - (r.left + r.width / 2);
-      const dy = e.clientY - (r.top + r.height * 0.35); // eyes ~ upper third
+      const dx = x - (r.left + r.width / 2);
+      const dy = y - (r.top + r.height * 0.35); // eyes ~ upper third
       const dead = 60; // px around the face where he looks straight
       const col = dx > dead ? 2 : dx < -dead ? 0 : 1;
       const row = dy > dead ? 2 : dy < -dead ? 0 : 1;
       setPos((p) => (p.col === col && p.row === row ? p : { col, row }));
     };
-    const onLeave = () => setPos({ col: 1, row: 1 });
+    const onMove = (e) => { if (!guide.active) look(e.clientX, e.clientY); };
+    const onGuide = (e) => {
+      if (e.detail) {
+        guide.active = true;
+        look(e.detail.x, e.detail.y);
+      } else if (guide.active) {
+        guide.active = false;
+        setPos({ col: 1, row: 1 }); // look straight until the mouse moves again
+      }
+    };
+    const onLeave = () => { if (!guide.active) setPos({ col: 1, row: 1 }); };
+
     window.addEventListener("mousemove", onMove);
+    window.addEventListener("guide-gaze", onGuide);
     document.addEventListener("mouseleave", onLeave);
     return () => {
       window.removeEventListener("mousemove", onMove);
+      window.removeEventListener("guide-gaze", onGuide);
       document.removeEventListener("mouseleave", onLeave);
     };
   }, []);

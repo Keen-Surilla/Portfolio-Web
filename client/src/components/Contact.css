@@ -1,3 +1,0 @@
-.contact-text { margin-bottom: 1.5rem; }
-.contact-email { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 0.9rem 0.9rem 0.9rem 1.25rem; max-width: 520px; color: var(--text-heading); overflow-wrap: anywhere; flex-wrap: wrap; }
-.contact-actions { display: flex; align-items: center; gap: 1.25rem; margin-top: 1.25rem; flex-wrap: wrap; }
